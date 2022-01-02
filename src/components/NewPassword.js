@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import supabase from "../utils/supabaseClient";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import supabase from "../utils/supabaseClient";
 import parseHash from "../utils/parseHash"; // Converts Hash to Object
 
 const NewPassword = () => {

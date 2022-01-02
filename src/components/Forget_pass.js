@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import supabase from "../utils/supabaseClient";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import supabase from "../utils/supabaseClient";
 
 const Forget_pass = () => {
 	const [email, setEmail] = useState("");
@@ -18,7 +19,8 @@ const Forget_pass = () => {
 		const { data: user, error } = await supabase.auth.api.resetPasswordForEmail(
 			email,
 			{
-				redirectTo: "http://localhost:3000/newpassword",
+				// redirectTo: "http://localhost:3000/newpassword", //*****Change to this for Local server*****
+				redirectTo: "https://supabase-weld.vercel.app/newpassword",
 			}
 		);
 		// check if the user does not exist

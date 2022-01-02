@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import supabase from "../utils/supabaseClient";
 
@@ -10,6 +10,8 @@ const Forget_pass = () => {
 
 	// Navigate hook from react-router-dom
 	const navigate = useNavigate();
+	const location = useLocation();
+	console.log(location);
 
 	// Form Submission handler
 	const submitHandler = async (e) => {
@@ -19,7 +21,7 @@ const Forget_pass = () => {
 		const { data: user, error } = await supabase.auth.api.resetPasswordForEmail(
 			email,
 			{
-				redirectTo: "https://supabase-saif0307.vercel.app/newpassword",
+				redirectTo: "https://supabase-weld.vercel.app/newpassword",
 				// redirectTo: "http://localhost:3000/newpassword", //*****Change to this for Local server*****
 			}
 		);

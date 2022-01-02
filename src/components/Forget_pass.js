@@ -19,7 +19,7 @@ const Forget_pass = () => {
 		const { data: user, error } = await supabase.auth.api.resetPasswordForEmail(
 			email,
 			{
-				redirectTo: "https://supabase-weld.vercel.app/newpassword",
+				redirectTo: "https://supabase-saif0307.vercel.app/newpassword",
 				// redirectTo: "http://localhost:3000/newpassword", //*****Change to this for Local server*****
 			}
 		);

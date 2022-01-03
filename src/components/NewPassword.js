@@ -5,6 +5,8 @@ import supabase from "../utils/supabaseClient";
 import parseHash from "../utils/parseHash"; // Converts Hash to Object
 
 const NewPassword = () => {
+	const [loading, setLoading] = useState(false);
+
 	const [password, setPassword] = useState(""); // Password controlled Input
 	const [Hash, setHash] = useState(null); // Hash from URL
 	const [parsedHash, setParsedHash] = useState({}); // Parsed Hash
@@ -31,6 +33,7 @@ const NewPassword = () => {
 
 	// Form Submit Handler
 	const submitHandler = async (e) => {
+		setLoading(true);
 		e.preventDefault();
 
 		// Send Updated Password to server
@@ -46,6 +49,7 @@ const NewPassword = () => {
 				setErrorMessage(error.message);
 				setPassword("");
 				setSuccess(false);
+				setLoading(false);
 				return;
 			}
 			// Success Case
@@ -53,6 +57,7 @@ const NewPassword = () => {
 			setPassword("");
 			setErrorMessage(null);
 			setTimeout(() => {
+				setLoading(false);
 				navigate("/");
 			}, 5000);
 		}
@@ -118,8 +123,35 @@ const NewPassword = () => {
 								: null}
 						</h1>
 					</div>
-					<button className="py-4 w-full rounded bg-blue-700 hover:bg-blue-600 focus:bg-blue-800 text-base font-medium leading-none text-white">
+					<button
+						disabled={loading ? true : false}
+						className={`${
+							loading ? "cursor-wait" : ""
+						} py-4 flex-inline justify-center items-center w-full rounded bg-blue-700 hover:bg-blue-600 focus:bg-blue-800 text-base font-medium leading-none text-white`}
+					>
 						Reset Password
+						<svg
+							className={`${
+								loading ? "inline-block" : "hidden"
+							} animate-spin  -mr-1 ml-3 h-5 w-5 text-white`}
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+						>
+							<circle
+								class="opacity-25"
+								cx="12"
+								cy="12"
+								r="10"
+								stroke="currentColor"
+								strokeWidth="4"
+							></circle>
+							<path
+								class="opacity-75"
+								fill="currentColor"
+								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+							></path>
+						</svg>
 					</button>
 				</form>
 				<button className="absolute top-0 right-6">
